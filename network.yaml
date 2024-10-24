@@ -23,7 +23,6 @@ archetypes:  # `caf-enterprise-scale` module, add inputs as listed on the module
   deploy_connectivity_resources: true
   deploy_identity_resources: true
   disable_telemetry: true
-  strict_subscription_association: false
 
   # Management
   configure_management_resources:
