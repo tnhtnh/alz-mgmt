@@ -183,7 +183,8 @@ archetypes:  # `caf-enterprise-scale` module, add inputs as listed on the module
             signalr: false
             signalr_webpubsub: false
             storage_account_blob: false
-        - ${starter_location}
+        private_link_locations:
+          - ${starter_location}
       public_dns_zones: []
       private_dns_zones: []
       enable_private_dns_zone_virtual_network_link_on_hubs: false
