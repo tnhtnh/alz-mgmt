@@ -10,24 +10,19 @@ The Azure Landing Zone is a foundational set of cloud infrastructure components 
 graph TB
     sq[Square shape] --> ci((Circle shape))
 
-    subgraph A
-        od>Odd shape]-- Two line<br/>edge comment --> ro
-        di{Diamond with <br/> line break} -.-> ro(Rounded<br>square<br>shape)
-        di==>ro2(Rounded square shape)
+    subgraph Deploy Accelerator
+        A --> B
+        C --> D
+        E -- something --> F
+        G ==> H
     end
 
-    %% Notice that no text in shape are added here instead that is appended further down
-    e --> od3>Really long text with linebreak<br>in an Odd shape]
+    subgraph This repo
+        I --> J
+        f(k) --> g(l)
+    end
 
-    %% Comments after double percent signs
-    e((Inner / circle<br>and some odd <br>special characters)) --> f(,.?!+-*ز)
-
-    cyr[Cyrillic]-->cyr2((Circle shape Начало));
-
-     classDef green fill:#9f6,stroke:#333,stroke-width:2px;
-     classDef orange fill:#f96,stroke:#333,stroke-width:4px;
-     class sq,e green
-     class di orange
+    %% comments
 
 ```
 
