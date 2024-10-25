@@ -207,7 +207,7 @@ archetypes:  # `caf-enterprise-scale` module, add inputs as listed on the module
 
 
   custom_landing_zones:
-    data_platform:
+    data-platform:
       display_name: Data Platform
       archetype_config:
         parameters:

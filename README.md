@@ -7,38 +7,28 @@ This project deploys the default Azure Landing Zone.
 The Azure Landing Zone is a foundational set of cloud infrastructure components designed to ensure a secure and scalable environment for your Azure resources. This deployment uses the default configuration to set up a standardized landing zone.
 
 ```mermaid
-C4Context
-title System Context diagram for Internet Banking System
+graph TB
+    sq[Square shape] --> ci((Circle shape))
 
-Person(customerA, "Banking Customer A", "A customer of the bank, with personal bank accounts.")
-Person(customerB, "Banking Customer B")
-Person_Ext(customerC, "Banking Customer C")
-System(SystemAA, "Internet Banking System", "Allows customers to view information about their bank accounts, and make payments.")
+    subgraph A
+        od>Odd shape]-- Two line<br/>edge comment --> ro
+        di{Diamond with <br/> line break} -.-> ro(Rounded<br>square<br>shape)
+        di==>ro2(Rounded square shape)
+    end
 
-Person(customerD, "Banking Customer D", "A customer of the bank, <br/> with personal bank accounts.")
+    %% Notice that no text in shape are added here instead that is appended further down
+    e --> od3>Really long text with linebreak<br>in an Odd shape]
 
-Enterprise_Boundary(b1, "BankBoundary") {
+    %% Comments after double percent signs
+    e((Inner / circle<br>and some odd <br>special characters)) --> f(,.?!+-*ز)
 
-  SystemDb_Ext(SystemE, "Mainframe Banking System", "Stores all of the core banking information about customers, accounts, transactions, etc.")
+    cyr[Cyrillic]-->cyr2((Circle shape Начало));
 
-  System_Boundary(b2, "BankBoundary2") {
-    System(SystemA, "Banking System A")
-    System(SystemB, "Banking System B", "A system of the bank, with personal bank accounts.")
-  }
+     classDef green fill:#9f6,stroke:#333,stroke-width:2px;
+     classDef orange fill:#f96,stroke:#333,stroke-width:4px;
+     class sq,e green
+     class di orange
 
-  System_Ext(SystemC, "E-mail system", "The internal Microsoft Exchange e-mail system.")
-  SystemDb(SystemD, "Banking System D Database", "A system of the bank, with personal bank accounts.")
-
-  Boundary(b3, "BankBoundary3", "boundary") {
-    SystemQueue(SystemF, "Banking System F Queue", "A system of the bank, with personal bank accounts.")
-    SystemQueue_Ext(SystemG, "Banking System G Queue", "A system of the bank, with personal bank accounts.")
-  }
-}
-
-BiRel(customerA, SystemAA, "Uses")
-BiRel(SystemAA, SystemE, "Uses")
-Rel(SystemAA, SystemC, "Sends e-mails", "SMTP")
-Rel(SystemC, customerA, "Sends e-mails to")
 ```
 
 ## Features
