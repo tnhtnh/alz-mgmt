@@ -7,6 +7,25 @@ on:
   workflow_dispatch:
 
 jobs:
+  validate_config:
+    runs-on: ubuntu-latest
+    name: 'Validate Config'
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Validate tenant config
+        run: python scripts/validate_config.py
+  
   validate_and_plan:
     uses: tnhtnh/alz-mgmt-templates/.github/workflows/ci-template.yaml@main
     name: 'CI'
