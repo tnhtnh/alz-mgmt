@@ -1,52 +1,71 @@
-# Azure Landing Zone Deployment
+# Azure Landing Zone - Data Platform Deployment
 
-This project deploys the default Azure Landing Zone.
+[![Build Status](https://github.com/tnhtnh/alz-platform/workflows/01%20Azure%20Landing%20Zones%20Continuous%20Integration/badge.svg)](https://github.com/tnhtnh/alz-platform/actions)
+[![Deployment Status](https://github.com/tnhtnh/alz-platform/workflows/02%20Azure%20Landing%20Zones%20Continuous%20Delivery/badge.svg)](https://github.com/tnhtnh/alz-platform/actions)
 
-## Overview
+This project implements a specialized Data Platform Landing Zone within the Azure Landing Zone framework, focusing on Microsoft Fabric workloads with integrated cost management and security controls.
 
-The Azure Landing Zone is a foundational set of cloud infrastructure components designed to ensure a secure and scalable environment for your Azure resources. This deployment uses the default configuration to set up a standardized landing zone.
+## Architecture Overview
 
 ```mermaid
 graph TB
-    sq[Square shape] --> ci((Circle shape))
+    subgraph "Enterprise Scale Landing Zone"
+        MG[Management Groups] --> P[Platform]
+        MG --> LZ[Landing Zones]
+        
+        subgraph "Platform Management Groups"
+            P --> C[Connectivity]
+            P --> I[Identity]
+            P --> M[Management]
+        end
 
-    subgraph Deploy Accelerator
-        A --> B
-        C --> D
-        E -- something --> F
-        G ==> H
+        subgraph "Landing Zone Management Groups"
+            LZ --> DP[Data Platform]
+            
+            subgraph "Data Platform Components"
+                DP --> FB[Microsoft Fabric]
+                DP --> CM[Cost Management]
+                FB --> FW[Workspaces]
+                FB --> FC[Capacities]
+                CM --> BD[Budget Dashboard]
+                CM --> BA[Budget Alerts]
+            end
+        end
     end
 
-    subgraph This repo
-        I --> J
-        f(k) --> g(l)
+    subgraph "Governance"
+        POL[Policies] --> RT[Resource Types]
+        POL --> LOC[Locations]
+        POL --> CST[Cost Controls]
     end
-
-    %% comments
-
 ```
 
 ## Features
+* *Microsoft Fabric Focus*: Specialized landing zone for Microsoft Fabric workloads
+* *Cost Control*:
+  * Integrated cost management dashboard
+  * Multi-threshold budget alerts (50%, 75%, 90%, 100%)
+  * Monthly budget tracking and reporting
+* *Security & Governance*:
+  * Strict resource type controls
+  * Geographic boundary enforcement
+  * Network security policies
+* *Automated Deployment*:
+  * Infrastructure as Code using Terraform
+  * CI/CD pipelines for reliable deployments
+  * Configuration validation
 
-- Deploys the default Azure Landing Zone configuration
-- Establishes a well-structured, secure foundation for Azure resources
-- Implements best practices for governance, security, and compliance
+
 
 ## Prerequisites
+* Azure Subscription with Owner permissions
+* Azure CLI (version 2.50.0 or higher)
+* Terraform (version ~> 1.8)
+* GitHub Actions (for CI/CD)
 
-- Azure subscription
-- Azure CLI or Azure PowerShell
-- Necessary permissions to create resources in your Azure subscription
-
-## Deployment
-
-[Include specific deployment instructions here]
-
-## Contributing
-
-[Add contribution guidelines if applicable]
-
-## License
-
-[Specify the license for your project]
-
+## Custodianship
+| Role | Responsibility | Contact |
+|------|----------------|---------|
+| Platform Owner | Overall platform architecture and strategy | @platform-team |
+| Security Owner | Security policies and compliance | @security-team |
+| Cost Management | Budget monitoring and optimization | @finance-team |
