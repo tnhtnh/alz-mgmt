@@ -62,6 +62,47 @@ graph TB
 * Terraform (version ~> 1.8)
 * GitHub Actions (for CI/CD)
 
+## Getting Started
+
+### Making Changes to the Configuration
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/tnhtnh/alz-platform.git
+   cd alz-platform
+   ```
+
+2. Create a new branch for your changes:
+   ```bash
+   git checkout -b feature/your-feature-name
+   ```
+
+3. Open and edit the `tenant-config.yaml` file to make your desired changes.
+
+4. Commit your changes:
+   ```bash
+   git add tenant-config.yaml
+   git commit -m "Description of your changes"
+   ```
+
+5. Push your branch to the remote repository:
+   ```bash
+   git push origin feature/your-feature-name
+   ```
+
+6. Open a Pull Request (PR) on GitHub for review and integration.
+
+### Setting Up the Environment
+
+1. Ensure you have met all the prerequisites listed above.
+2. Run the setup script:
+   ```bash
+   ./setup.sh
+   ```
+3. Follow the prompts to configure your Azure environment and authenticate.
+
+For detailed setup instructions, refer to the [Setup Guide](docs/setup-guide.md).
+
 ## Custodianship
 | Role | Responsibility | Contact |
 |------|----------------|---------|
