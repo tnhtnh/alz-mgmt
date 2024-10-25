@@ -1,0 +1,189 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "properties": {
+      "archetypes": {
+        "type": "object",
+        "required": [
+          "root_name",
+          "root_id",
+          "subscription_id_connectivity",
+          "subscription_id_identity",
+          "subscription_id_management",
+          "root_parent_id"
+        ],
+        "properties": {
+          "root_name": { "type": "string" },
+          "root_id": { "type": "string" },
+          "subscription_id_connectivity": { "type": "string" },
+          "subscription_id_identity": { "type": "string" },
+          "subscription_id_management": { "type": "string" },
+          "root_parent_id": { "type": "string" },
+          "deploy_core_landing_zones": { "type": "boolean" },
+          "deploy_corp_landing_zones": { "type": "boolean" },
+          "deploy_online_landing_zones": { "type": "boolean" },
+          "default_location": { "type": "string" },
+          "deploy_management_resources": { "type": "boolean" },
+          "deploy_connectivity_resources": { "type": "boolean" },
+          "deploy_identity_resources": { "type": "boolean" },
+          "disable_telemetry": { "type": "boolean" },
+          "configure_management_resources": {
+            "type": "object",
+            "required": ["location", "settings"],
+            "properties": {
+              "location": { "type": "string" },
+              "settings": {
+                "type": "object",
+                "required": ["log_analytics", "security_center"],
+                "properties": {
+                  "log_analytics": {
+                    "type": "object",
+                    "required": ["enabled", "config"],
+                    "properties": {
+                      "enabled": { "type": "boolean" },
+                      "config": {
+                        "type": "object",
+                        "properties": {
+                          "retention_in_days": { "type": "integer" },
+                          "enable_monitoring_for_vm": { "type": "boolean" },
+                          "enable_monitoring_for_vmss": { "type": "boolean" },
+                          "enable_solution_for_agent_health_assessment": { "type": "boolean" },
+                          "enable_solution_for_anti_malware": { "type": "boolean" },
+                          "enable_solution_for_change_tracking": { "type": "boolean" },
+                          "enable_solution_for_service_map": { "type": "boolean" },
+                          "enable_solution_for_sql_assessment": { "type": "boolean" },
+                          "enable_solution_for_sql_vulnerability_assessment": { "type": "boolean" },
+                          "enable_solution_for_sql_advanced_threat_detection": { "type": "boolean" },
+                          "enable_solution_for_updates": { "type": "boolean" },
+                          "enable_solution_for_vm_insights": { "type": "boolean" },
+                          "enable_solution_for_container_insights": { "type": "boolean" },
+                          "enable_sentinel": { "type": "boolean" }
+                        }
+                      }
+                    }
+                  },
+                  "security_center": {
+                    "type": "object",
+                    "required": ["enabled", "config"],
+                    "properties": {
+                      "enabled": { "type": "boolean" },
+                      "config": {
+                        "type": "object",
+                        "properties": {
+                          "email_security_contact": { "type": "string", "format": "email" },
+                          "enable_defender_for_apis": { "type": "boolean" },
+                          "enable_defender_for_app_services": { "type": "boolean" },
+                          "enable_defender_for_arm": { "type": "boolean" },
+                          "enable_defender_for_containers": { "type": "boolean" },
+                          "enable_defender_for_cosmosdbs": { "type": "boolean" },
+                          "enable_defender_for_cspm": { "type": "boolean" },
+                          "enable_defender_for_dns": { "type": "boolean" },
+                          "enable_defender_for_key_vault": { "type": "boolean" },
+                          "enable_defender_for_oss_databases": { "type": "boolean" },
+                          "enable_defender_for_servers": { "type": "boolean" },
+                          "enable_defender_for_servers_vulnerability_assessments": { "type": "boolean" },
+                          "enable_defender_for_sql_servers": { "type": "boolean" },
+                          "enable_defender_for_sql_server_vms": { "type": "boolean" },
+                          "enable_defender_for_storage": { "type": "boolean" }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "advanced": {
+                "type": "object",
+                "properties": {
+                  "asc_export_resource_group_name": { "type": "string" },
+                  "custom_settings_by_resource_type": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "configure_connectivity_resources": {
+            "type": "object",
+            "properties": {
+              "settings": {
+                "type": "object",
+                "properties": {
+                  "hub_networks": {
+                    "type": "array"
+                  },
+                  "vwan_hub_networks": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "enabled": { "type": "boolean" },
+                        "config": {
+                          "type": "object",
+                          "properties": {
+                            "address_prefix": { "type": "string" },
+                            "location": { "type": "string" },
+                            "sku": { "type": "string" },
+                            "routes": { "type": "array" }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "configure_identity_resources": {
+            "type": "object",
+            "properties": {
+              "settings": {
+                "type": "object",
+                "properties": {
+                  "identity": {
+                    "type": "object",
+                    "properties": {
+                      "enabled": { "type": "boolean" },
+                      "config": {
+                        "type": "object",
+                        "properties": {
+                          "enable_deny_public_ip": { "type": "boolean" },
+                          "enable_deny_rdp_from_internet": { "type": "boolean" },
+                          "enable_deny_subnet_without_nsg": { "type": "boolean" },
+                          "enable_deploy_azure_backup_on_vms": { "type": "boolean" }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "custom_landing_zones": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object",
+              "properties": {
+                "display_name": { "type": "string" },
+                "parent_management_group_id": { "type": "string" },
+                "subscription_ids": {
+                  "type": "array",
+                  "items": { "type": "string" }
+                },
+                "archetype_config": {
+                  "type": "object",
+                  "properties": {
+                    "archetype_id": { "type": "string" },
+                    "access_control": { "type": "object" },
+                    "parameters": { "type": "object" }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }

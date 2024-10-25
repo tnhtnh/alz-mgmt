@@ -27,6 +27,7 @@ jobs:
         run: python scripts/validate_config.py
   
   validate_and_plan:
+    needs: validate_config
     uses: tnhtnh/alz-mgmt-templates/.github/workflows/ci-template.yaml@main
     name: 'CI'
     permissions:

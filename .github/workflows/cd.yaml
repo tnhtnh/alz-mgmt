@@ -16,7 +16,6 @@ on:
           - 'destroy'
 
 jobs:
-
   validate_config:
     runs-on: ubuntu-latest
     name: 'Validate Config'
@@ -35,7 +34,9 @@ jobs:
 
       - name: Validate tenant config
         run: python scripts/validate_config.py
+
   plan_and_apply:
+    needs: validate_config
     uses: tnhtnh/alz-mgmt-templates/.github/workflows/cd-template.yaml@main
     name: 'CD'
     permissions:
