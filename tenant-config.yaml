@@ -212,7 +212,7 @@ archetypes:  # `caf-enterprise-scale` module, add inputs as listed on the module
       parent_management_group_id: ${data_platform_parent_id}
       subscription_ids: [ "${subscription_id_data_platform}" ]
       archetype_config:
-        archetype_id: data_platform
+        archetype_id: default_empty #data_platform
         access_control: {}
         parameters:
           Deny-Resource-Types-Data-Platform:
