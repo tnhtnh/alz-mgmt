@@ -44,7 +44,7 @@ archetypes:  # `caf-enterprise-scale` module, add inputs as listed on the module
           enable_solution_for_updates: true
           enable_solution_for_vm_insights: true
           enable_solution_for_container_insights: true
-          enable_sentinel: true
+          enable_sentinel: false
       security_center:
         enabled: true
         config:
