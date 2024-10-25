@@ -212,23 +212,34 @@ archetypes:  # `caf-enterprise-scale` module, add inputs as listed on the module
       parent_management_group_id: ${data_platform_parent_id}
       subscription_ids: [ "${subscription_id_data_platform}" ]
       archetype_config:
-        archetype_id: default_empty #data_platform
+        archetype_id: default_empty  # Change this from data_platform to default_empty
         access_control: {}
-        parameters:
-          Deny-Resource-Types:
-            listOfResourceTypesAllowed:
-              - Microsoft.Fabric/capacities
-              - Microsoft.Fabric/workspaces
-              - Microsoft.Fabric/instances
-              - Microsoft.Resources/resourceGroups
-              - Microsoft.Network/virtualNetworks
-              - Microsoft.Network/networkSecurityGroups
-              - Microsoft.Network/routeTables
-              - Microsoft.KeyVault/vaults
-              - Microsoft.Storage/storageAccounts
-              - Microsoft.Insights/diagnosticSettings
-              - Microsoft.OperationalInsights/workspaces
-          Deny-Resource-Locations:
-            listOfAllowedLocations:
-              - ${starter_location}
-
+        parameters: {
+          "Deny-Resource-Types": {  # Using built-in policy
+            "listOfResourceTypesNotAllowed": [
+              "*"  # Deny all resources by default
+            ],
+            "effect": "Deny"
+          },
+          "Allowed-ResourceTypes": {  # Create a new policy assignment for allowed types
+            "listOfResourceTypesAllowed": [
+              "Microsoft.Fabric/capacities",
+              "Microsoft.Fabric/workspaces",
+              "Microsoft.Fabric/instances",
+              "Microsoft.Resources/resourceGroups",
+              "Microsoft.Network/virtualNetworks",
+              "Microsoft.Network/networkSecurityGroups",
+              "Microsoft.Network/routeTables",
+              "Microsoft.KeyVault/vaults",
+              "Microsoft.Storage/storageAccounts",
+              "Microsoft.Insights/diagnosticSettings",
+              "Microsoft.OperationalInsights/workspaces"
+            ],
+            "effect": "Allow"
+          },
+          "Deny-Resource-Locations": {
+            "listOfAllowedLocations": [
+              "${starter_location}"
+            ]
+          }
+        }

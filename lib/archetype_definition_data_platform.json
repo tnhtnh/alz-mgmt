@@ -1,0 +1,38 @@
+{
+    "default_empty": {
+      "policy_assignments": [
+        "Deny-Resource-Types",
+        "Allowed-ResourceTypes",
+        "Deny-Resource-Locations"
+      ],
+      "policy_definitions": [
+        "Allowed-ResourceTypes"
+      ],
+      "policy_set_definitions": [],
+      "role_definitions": [],
+      "archetype_config": {
+        "parameters": {
+          "Deny-Resource-Types": {
+            "listOfResourceTypesNotAllowed": ["*"],
+            "effect": "Deny"
+          },
+          "Allowed-ResourceTypes": {
+            "listOfResourceTypesAllowed": [
+              "Microsoft.Fabric/capacities",
+              "Microsoft.Fabric/workspaces",
+              "Microsoft.Fabric/instances",
+              "Microsoft.Resources/resourceGroups",
+              "Microsoft.Network/virtualNetworks",
+              "Microsoft.Network/networkSecurityGroups",
+              "Microsoft.Network/routeTables",
+              "Microsoft.KeyVault/vaults",
+              "Microsoft.Storage/storageAccounts",
+              "Microsoft.Insights/diagnosticSettings",
+              "Microsoft.OperationalInsights/workspaces"
+            ],
+            "effect": "Allow"
+          }
+        }
+      }
+    }
+  }
