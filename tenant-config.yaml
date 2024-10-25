@@ -210,7 +210,7 @@ archetypes:  # `caf-enterprise-scale` module, add inputs as listed on the module
     data-platform:
       display_name: Data Platform
       parent_management_group_id: booth-landing-zones
-      subscription_ids: f234f71e-1e8c-4b78-8809-a443d98c342f
+      subscription_ids: [ "f234f71e-1e8c-4b78-8809-a443d98c342f" ]
       archetype_config:
         archetype_id: default_empty
         access_control: {}
