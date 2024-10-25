@@ -16,8 +16,8 @@ archetypes:  # `caf-enterprise-scale` module, add inputs as listed on the module
   subscription_id_management: ${subscription_id_management}
   root_parent_id: ${root_parent_management_group_id}
   deploy_core_landing_zones: true
-  deploy_corp_landing_zones: true
-  deploy_online_landing_zones: true
+  deploy_corp_landing_zones: false
+  deploy_online_landing_zones: false
   default_location: ${starter_location}
   deploy_management_resources: true
   deploy_connectivity_resources: true
