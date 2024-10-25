@@ -206,14 +206,14 @@ archetypes:  # `caf-enterprise-scale` module, add inputs as listed on the module
           enable_deploy_azure_backup_on_vms: true
 
 
-custom_landing_zones:
-  data_platform:
-    display_name: Data Platform
-    archetype_config:
-      parameters:
-        Deny-Resource-Locations:
-          listOfAllowedLocations:
-            - ${starter_location}
+  custom_landing_zones:
+    data_platform:
+      display_name: Data Platform
+      archetype_config:
+        parameters:
+          Deny-Resource-Locations:
+            listOfAllowedLocations:
+              - ${starter_location}
 
 # ** vNext **
 # vNext is currently under development and will contain the next version of Terraform providers for CAF ALZ deployment.
