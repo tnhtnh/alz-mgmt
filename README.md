@@ -8,21 +8,27 @@ The Azure Landing Zone is a foundational set of cloud infrastructure components 
 
 ```mermaid
 graph LR
+    A[setup.yml]
+    B[Storage Account]
+    C[Git Repository]
+    D[Management Trust]
+    E[Deploy-Accelerator]
+
     subgraph Landing Zone Setup
-        A[setup.yml] as "Configuration file"
+        A
     end
 
     subgraph Azure
-        B[Storage Account] as "Azure Storage Account"
+        B
     end
 
     subgraph GitHub
-        C[Git Repository] as "This Git Repository"
-        D[Management Trust] as "GitHub Management Trust"
+        C
+        D
     end
 
     subgraph Deploy Accelerator
-        E[Deploy-Accelerator] as "PowerShell Module"
+        E
     end
 
     A -->|Runs via PowerShell|> E
