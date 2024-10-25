@@ -14,12 +14,18 @@ locals {
     jsondecode(templatefile("${path.module}/${local.config_file_name}", local.config_template_file_variables))
   )
   config_template_file_variables = {
+    root_id                         = var.root_id
     starter_location                = local.starter_location
     default_postfix                 = var.default_postfix
     root_parent_management_group_id = var.root_parent_management_group_id == "" ? data.azurerm_client_config.core.tenant_id : var.root_parent_management_group_id
     subscription_id_connectivity    = var.subscription_id_connectivity
     subscription_id_identity        = var.subscription_id_identity
     subscription_id_management      = var.subscription_id_management
+
+
+    # for landing zones
+    subscription_id_data_platform   = var.subscription_id_data_platform
+    data_platform_parent_id         = "${var.root_id}-landing-zones"
   }
 }
 locals {

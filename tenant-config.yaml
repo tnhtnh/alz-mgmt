@@ -10,7 +10,7 @@
 archetypes:  # `caf-enterprise-scale` module, add inputs as listed on the module registry where necessary.
   # Base variables
   root_name: Booth
-  root_id: booth
+  root_id: ${root_id}
   subscription_id_connectivity: ${subscription_id_connectivity}
   subscription_id_identity: ${subscription_id_identity}
   subscription_id_management: ${subscription_id_management}
@@ -209,8 +209,8 @@ archetypes:  # `caf-enterprise-scale` module, add inputs as listed on the module
   custom_landing_zones:
     data-platform:
       display_name: Data Platform
-      parent_management_group_id: booth-landing-zones
-      subscription_ids: [ "f234f71e-1e8c-4b78-8809-a443d98c342f" ]
+      parent_management_group_id: ${data_platform_parent_id}
+      subscription_ids: [ "${subscription_id_data_platform}" ]
       archetype_config:
         archetype_id: default_empty
         access_control: {}

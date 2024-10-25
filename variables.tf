@@ -35,3 +35,13 @@ variable "root_parent_management_group_id" {
   default     = ""
   description = "This is the id of the management group that the ALZ hierarchy will be nested under, will default to the Tenant Root Group|azure_name"
 }
+
+variable "subscription_id_data_platform" {
+  type        = string
+  description = "The subscription id for the Data Platform subscription|azure_subscription_id"
+}
+
+variable "root_id" {
+  type        = string
+  description = "The id of the root management group|azure_name"
+}
