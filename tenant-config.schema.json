@@ -1,6 +1,7 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
+    "required": ["archetypes"],
     "properties": {
       "archetypes": {
         "type": "object",
@@ -10,7 +11,11 @@
           "subscription_id_connectivity",
           "subscription_id_identity",
           "subscription_id_management",
-          "root_parent_id"
+          "root_parent_id",
+          "deploy_core_landing_zones",
+          "deploy_management_resources",
+          "deploy_connectivity_resources",
+          "deploy_identity_resources"
         ],
         "properties": {
           "root_name": { "type": "string" },
@@ -97,8 +102,40 @@
                   "asc_export_resource_group_name": { "type": "string" },
                   "custom_settings_by_resource_type": {
                     "type": "object",
-                    "additionalProperties": {
-                      "type": "object"
+                    "properties": {
+                      "azurerm_resource_group": {
+                        "type": "object",
+                        "properties": {
+                          "management": {
+                            "type": "object",
+                            "properties": {
+                              "name": { "type": "string" }
+                            }
+                          }
+                        }
+                      },
+                      "azurerm_log_analytics_workspace": {
+                        "type": "object",
+                        "properties": {
+                          "management": {
+                            "type": "object",
+                            "properties": {
+                              "name": { "type": "string" }
+                            }
+                          }
+                        }
+                      },
+                      "azurerm_automation_account": {
+                        "type": "object",
+                        "properties": {
+                          "management": {
+                            "type": "object",
+                            "properties": {
+                              "name": { "type": "string" }
+                            }
+                          }
+                        }
+                      }
                     }
                   }
                 }
@@ -107,13 +144,12 @@
           },
           "configure_connectivity_resources": {
             "type": "object",
+            "required": ["settings"],
             "properties": {
               "settings": {
                 "type": "object",
                 "properties": {
-                  "hub_networks": {
-                    "type": "array"
-                  },
+                  "hub_networks": { "type": "array" },
                   "vwan_hub_networks": {
                     "type": "array",
                     "items": {
@@ -126,14 +162,100 @@
                             "address_prefix": { "type": "string" },
                             "location": { "type": "string" },
                             "sku": { "type": "string" },
-                            "routes": { "type": "array" }
+                            "routes": { "type": "array" },
+                            "expressroute_gateway": {
+                              "type": "object",
+                              "properties": {
+                                "enabled": { "type": "boolean" },
+                                "config": {
+                                  "type": "object",
+                                  "properties": {
+                                    "scale_unit": { "type": "integer" }
+                                  }
+                                }
+                              }
+                            },
+                            "vpn_gateway": {
+                              "type": "object",
+                              "properties": {
+                                "enabled": { "type": "boolean" },
+                                "config": {
+                                  "type": "object",
+                                  "properties": {
+                                    "bgp_settings": { "type": "array" },
+                                    "routing_preference": { "type": "string" },
+                                    "scale_unit": { "type": "integer" }
+                                  }
+                                }
+                              }
+                            },
+                            "azure_firewall": {
+                              "type": "object",
+                              "properties": {
+                                "enabled": { "type": "boolean" },
+                                "config": {
+                                  "type": "object",
+                                  "properties": {
+                                    "enable_dns_proxy": { "type": "boolean" },
+                                    "dns_servers": { "type": "array" },
+                                    "sku_tier": { "type": "string" },
+                                    "base_policy_id": { "type": "string" },
+                                    "private_ip_ranges": { "type": "array" },
+                                    "threat_intelligence_mode": { "type": "string" },
+                                    "threat_intelligence_allowlist": { "type": "object" },
+                                    "availability_zones": {
+                                      "type": "object",
+                                      "properties": {
+                                        "zone_1": { "type": "boolean" },
+                                        "zone_2": { "type": "boolean" },
+                                        "zone_3": { "type": "boolean" }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            },
+                            "spoke_virtual_network_resource_ids": { "type": "array" },
+                            "enable_outbound_virtual_network_peering": { "type": "boolean" },
+                            "enable_hub_network_mesh_peering": { "type": "boolean" }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "ddos_protection_plan": {
+                    "type": "object",
+                    "properties": {
+                      "enabled": { "type": "boolean" },
+                      "config": {
+                        "type": "object",
+                        "properties": {
+                          "location": { "type": ["string", "null"] }
+                        }
+                      }
+                    }
+                  },
+                  "dns": {
+                    "type": "object",
+                    "properties": {
+                      "enabled": { "type": "boolean" },
+                      "config": {
+                        "type": "object",
+                        "properties": {
+                          "location": { "type": ["string", "null"] },
+                          "enable_private_link_by_service": {
+                            "type": "object",
+                            "additionalProperties": { "type": "boolean" }
                           }
                         }
                       }
                     }
                   }
                 }
-              }
+              },
+              "location": { "type": "string" },
+              "tags": { "type": ["object", "null"] },
+              "advanced": { "type": ["object", "null"] }
             }
           },
           "configure_identity_resources": {
@@ -163,21 +285,38 @@
           },
           "custom_landing_zones": {
             "type": "object",
-            "additionalProperties": {
-              "type": "object",
-              "properties": {
-                "display_name": { "type": "string" },
-                "parent_management_group_id": { "type": "string" },
-                "subscription_ids": {
-                  "type": "array",
-                  "items": { "type": "string" }
-                },
-                "archetype_config": {
-                  "type": "object",
-                  "properties": {
-                    "archetype_id": { "type": "string" },
-                    "access_control": { "type": "object" },
-                    "parameters": { "type": "object" }
+            "properties": {
+              "data-platform": {
+                "type": "object",
+                "required": ["display_name", "parent_management_group_id", "subscription_ids", "archetype_config"],
+                "properties": {
+                  "display_name": { "type": "string" },
+                  "parent_management_group_id": { "type": "string" },
+                  "subscription_ids": {
+                    "type": "array",
+                    "items": { "type": "string" }
+                  },
+                  "archetype_config": {
+                    "type": "object",
+                    "required": ["archetype_id"],
+                    "properties": {
+                      "archetype_id": { "type": "string" },
+                      "access_control": { "type": "object" },
+                      "parameters": {
+                        "type": "object",
+                        "properties": {
+                          "Deny-Resource-Locations": {
+                            "type": "object",
+                            "properties": {
+                              "listOfAllowedLocations": {
+                                "type": "array",
+                                "items": { "type": "string" }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
                   }
                 }
               }
