@@ -1,7 +1,7 @@
 # Azure Landing Zone - Data Platform Deployment
 
-[![Build Status](https://github.com/tnhtnh/alz-platform/workflows/01%20Azure%20Landing%20Zones%20Continuous%20Integration/badge.svg)](https://github.com/tnhtnh/alz-platform/actions)
-[![Deployment Status](https://github.com/tnhtnh/alz-platform/workflows/02%20Azure%20Landing%20Zones%20Continuous%20Delivery/badge.svg)](https://github.com/tnhtnh/alz-platform/actions)
+[![Build Status](https://github.com/tnhtnh/alz-mgmt/actions/workflows/cd.yaml/badge.svg)](https://github.com/tnhtnh/alz-platform/actions)
+[![Deployment Status](https://github.com/tnhtnh/alz-mgmt/actions/workflows/cd.yaml/badge.svg)](https://github.com/tnhtnh/alz-platform/actions)
 
 This project implements a specialized Data Platform Landing Zone within the Azure Landing Zone framework, focusing on Microsoft Fabric workloads with integrated cost management and security controls.
 
@@ -9,7 +9,7 @@ This project implements a specialized Data Platform Landing Zone within the Azur
 
 ```mermaid
 graph TB
-    subgraph "Enterprise Scale Landing Zone"
+    subgraph "Enterprise Scale Landing Zone - defined in tenant-config.yaml"
         MG[Management Groups] --> P[Platform]
         MG --> LZ[Landing Zones]
         
@@ -21,6 +21,7 @@ graph TB
 
         subgraph "Landing Zone Management Groups"
             LZ --> DP[Data Platform]
+            LZ --> NL[New Landing Zone]
             
             subgraph "Data Platform Components"
                 DP --> FB[Microsoft Fabric]
@@ -30,13 +31,11 @@ graph TB
                 CM --> BD[Budget Dashboard]
                 CM --> BA[Budget Alerts]
             end
-        end
-    end
 
-    subgraph "Governance"
-        POL[Policies] --> RT[Resource Types]
-        POL --> LOC[Locations]
-        POL --> CST[Cost Controls]
+            subgraph "New Landing Zone"
+                NL --> WL[Workload]
+            end
+        end
     end
 ```
 
