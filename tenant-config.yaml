@@ -215,7 +215,7 @@ archetypes:  # `caf-enterprise-scale` module, add inputs as listed on the module
         archetype_id: default_empty #data_platform
         access_control: {}
         parameters:
-          Deny-Resource-Types-Data-Platform:
+          Deny-Resource-Types:
             listOfResourceTypesAllowed:
               - Microsoft.Fabric/capacities
               - Microsoft.Fabric/workspaces
