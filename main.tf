@@ -143,3 +143,10 @@ module "vwan" {
     module.enterprise_scale
   ]
 }
+
+module "admin_groups" {
+  source = "./modules/admin-groups"
+
+  landing-zone-management-group-name = var.root_parent_management_group_id
+  data-platform-management-group-name = "data-platform"
+}
