@@ -17,18 +17,6 @@ locals {
   }
 }
 
-resource "azurerm_role_assignment" "lz_tenant_admin_role" {
-  scope                = data.azurerm_management_group.lz.id
-  role_definition_name = "Owner"
-  principal_id         = local.group_ids["Azure Tenant Admin"]
-}
-
-resource "azurerm_role_assignment" "lz_tenant_readonly_role" {
-  scope                = data.azurerm_management_group.lz.id
-  role_definition_name = "Reader"
-  principal_id         = local.group_ids["Azure Tenant ReadOnly"]
-}
-
 resource "azurerm_role_assignment" "data_platform_admin_role" {
   scope                = data.azurerm_management_group.data_platform.id
   role_definition_name = "Owner"
