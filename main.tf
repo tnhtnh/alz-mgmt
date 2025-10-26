@@ -107,7 +107,7 @@ module "virtual_network_gateway" {
 
 module "vwan" {
   source  = "Azure/avm-ptn-virtualwan/azurerm"
-  version = "~> 0.5.0"
+  version = "~> 0.14.1"
 
   count = length(local.module_vwan) > 0 ? 1 : 0
 
