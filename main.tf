@@ -53,7 +53,7 @@ module "enterprise_scale" {
 
 module "hubnetworking" {
   source  = "Azure/hubnetworking/azurerm"
-  version = "~> 1.1.0"
+  version = "~> 1.2.2"
 
   count = length(local.hub_virtual_networks) > 0 ? 1 : 0
 
